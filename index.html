@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dashboard Pro Volume Timbunan DTM</title>
+  <title>Dashboard Volume Timbunan DTM</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/geotiff@2.1.3/dist-browser/geotiff.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
@@ -12,34 +12,229 @@
 <body>
   <div class="app-shell">
     <aside class="sidebar">
-      <div class="brand compact-brand"><div class="brand-icon">DTM</div><div><h1>Volume Timbunan Pro</h1><p>Survey Engineer Dashboard</p></div></div>
-      <nav><a href="#input">1. Import Data</a><a href="#parameter">2. Parameter</a><a href="#hasil">3. Hasil Volume</a><a href="#map">4. Peta Heatmap</a><a href="#section">5. Long & Cross Section</a><a href="#export">6. Export</a></nav>
-      <div class="note"><b>Input wajib:</b><br />DTM Awal dan DTM Akhir (.tif/.tiff).<br><br><b>Input optional:</b><br />AOI batas kerja (.kml/.geojson/.shp/.zip).</div>
+      <div class="brand compact-brand">
+        <div class="brand-icon">DTM</div>
+        <div>
+          <h1>Volume Timbunan</h1>
+          <p>Survey Engineering Tools</p>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#input">1. Import Data</a>
+        <a href="#parameter">2. Parameter</a>
+        <a href="#hasil">3. Hasil Volume</a>
+        <a href="#map">4. Peta Heatmap</a>
+        <a href="#section">5. Long & Cross Section</a>
+        <a href="#export">6. Export</a>
+      </nav>
+
+      <div class="note">
+        <b>Input wajib:</b><br />
+        DTM Awal dan DTM Akhir (.tif/.tiff).<br><br>
+        <b>Input optional:</b><br />
+        AOI batas kerja (.kml/.geojson/.shp/.zip).
+      </div>
     </aside>
+
     <main>
-      <header class="topbar"><div class="topbar-left"><span class="mini-icon">©</span><span>Egi Nugraha</span></div><div class="topbar-contact"><span>✉ egi.geomatika@gmail.com</span><span>☎ 0895604053590</span></div></header>
-      <section class="hero"><div><p class="eyebrow">Survey Engineer Tools • DTM Processing • Cut & Fill</p><h2>Dashboard Perhitungan Volume Timbunan</h2><p>Versi static GitHub Pages: import DTM, optional AOI, parameter proyek, heatmap elevasi top view, long section, cross section, dan export laporan langsung dari browser.</p></div><div class="status-card"><span>Status</span><strong id="statusText">Siap digunakan</strong></div></section>
+      <header class="topbar">
+        <div class="topbar-left">
+          <span class="mini-icon">©</span>
+          <span>Egi Nugraha</span>
+        </div>
+        <div class="topbar-contact">
+          <span>✉ egi.geomatika@gmail.com</span>
+          <span>☎ 0895604053590</span>
+        </div>
+      </header>
+
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Survey Engineering • DTM Processing • Cut & Fill Analysis</p>
+          <h2>Dashboard Analisis Volume Timbunan</h2>
+          <p>
+            Platform perhitungan volume timbunan berbasis DTM untuk analisis cut and fill,
+            visualisasi heatmap elevasi, long section, cross section, serta export laporan proyek.
+          </p>
+        </div>
+
+        <div class="status-card">
+          <span>Status</span>
+          <strong id="statusText">Siap digunakan</strong>
+        </div>
+      </section>
+
       <form id="volumeForm" class="grid-form">
-        <section class="card" id="input"><div class="card-head"><h3>Import Data</h3><span>GeoTIFF + AOI</span></div>
-          <label class="upload-box required-box"><input type="file" name="dtmAwal" accept=".tif,.tiff" required /><b>DTM Awal</b><small>Kondisi awal / topografi existing</small></label>
-          <label class="upload-box required-box"><input type="file" name="dtmAkhir" accept=".tif,.tiff" required /><b>DTM Akhir</b><small>Kondisi akhir / design / after progress</small></label>
-          <label class="upload-box optional-box"><input type="file" name="aoiFile" accept=".kml,.geojson,.json,.shp,.zip" /><b>AOI / Batas Area <em>optional</em></b><small>KML/GeoJSON/SHP/ZIP untuk batas kerja atau dokumentasi clipping.</small></label>
+        <section class="card" id="input">
+          <div class="card-head">
+            <h3>Import Data</h3>
+            <span>GeoTIFF + AOI</span>
+          </div>
+
+          <label class="upload-box required-box">
+            <input type="file" name="dtmAwal" accept=".tif,.tiff" required />
+            <b>DTM Awal</b>
+            <small>Kondisi awal / topografi existing</small>
+          </label>
+
+          <label class="upload-box required-box">
+            <input type="file" name="dtmAkhir" accept=".tif,.tiff" required />
+            <b>DTM Akhir</b>
+            <small>Kondisi akhir / design / after progress</small>
+          </label>
+
+          <label class="upload-box optional-box">
+            <input type="file" name="aoiFile" accept=".kml,.geojson,.json,.shp,.zip" />
+            <b>AOI / Batas Area <em>optional</em></b>
+            <small>KML/GeoJSON/SHP/ZIP untuk batas kerja atau dokumentasi clipping.</small>
+          </label>
         </section>
-        <section class="card" id="parameter"><div class="card-head"><h3>Parameter Proyek</h3><span>Setting</span></div>
+
+        <section class="card" id="parameter">
+          <div class="card-head">
+            <h3>Parameter Proyek</h3>
+            <span>Setting</span>
+          </div>
+
           <div class="field-grid">
-            <label>Nama Proyek<input name="projectName" value="Analisis Volume Timbunan" /></label><label>Disiapkan Oleh<input name="preparedBy" value="Egi Nugraha" /></label>
-            <label>Tanggal Akuisisi Awal<input type="date" name="tanggalAwal" value="2025-07-16" /></label><label>Tanggal Akuisisi Akhir<input type="date" name="tanggalAkhir" value="2025-08-30" /></label>
-            <label>Sistem Koordinat / Geoid<input name="crsInfo" value="UTM Zone 54S / INAGeoid" /></label><label>Resolusi Spasial / Pixel (m)<input type="number" step="0.001" name="spatialResolution" value="0.1" /></label>
-            <label>Threshold Timbunan (m)<input type="number" step="0.001" name="thresholdTimbunan" value="0.05" /></label><label>Threshold Stabil ± (m)<input type="number" step="0.001" name="thresholdStabil" value="0.05" /></label>
-            <label>Interval Profil Lintas (m)<input type="number" step="0.1" name="profileInterval" value="1" /></label><label>Interval Grid Peta (m)<input type="number" step="0.1" name="gridInterval" value="5" /></label>
-          </div><button class="primary" type="submit">Proses Hitung Volume</button>
+            <label>Nama Proyek
+              <input name="projectName" value="Analisis Volume Timbunan" />
+            </label>
+
+            <label>Disiapkan Oleh
+              <input name="preparedBy" value="Egi Nugraha" />
+            </label>
+
+            <label>Tanggal Akuisisi Awal
+              <input type="date" name="tanggalAwal" value="2025-07-16" />
+            </label>
+
+            <label>Tanggal Akuisisi Akhir
+              <input type="date" name="tanggalAkhir" value="2025-08-30" />
+            </label>
+
+            <label>Sistem Koordinat / Geoid
+              <input name="crsInfo" value="UTM Zone 54S / INAGeoid" />
+            </label>
+
+            <label>Resolusi Spasial / Pixel (m)
+              <input type="number" step="0.001" name="spatialResolution" value="0.1" />
+            </label>
+
+            <label>Threshold Timbunan (m)
+              <input type="number" step="0.001" name="thresholdTimbunan" value="0.05" />
+            </label>
+
+            <label>Threshold Stabil ± (m)
+              <input type="number" step="0.001" name="thresholdStabil" value="0.05" />
+            </label>
+
+            <label>Interval Profil Lintas (m)
+              <input type="number" step="0.1" name="profileInterval" value="1" />
+            </label>
+
+            <label>Interval Grid Peta (m)
+              <input type="number" step="0.1" name="gridInterval" value="5" />
+            </label>
+          </div>
+
+          <button class="primary" type="submit">Proses Hitung Volume</button>
         </section>
       </form>
-      <section class="result-grid" id="hasil"><div class="metric fill"><span>Volume Timbunan</span><strong id="mFill">-</strong><small>m³</small></div><div class="metric cut"><span>Volume Galian</span><strong id="mCut">-</strong><small>m³</small></div><div class="metric net"><span>Net Volume</span><strong id="mNet">-</strong><small>m³</small></div><div class="metric area"><span>Luas Timbunan</span><strong id="mArea">-</strong><small>m²</small></div></section>
-      <section class="card preview-card" id="map"><div class="card-head"><h3>Peta Heatmap Perubahan Elevasi</h3><span>Top View + Section Line</span></div><div class="legend gradient-legend"><span>Biru (rendah / cut)</span><i></i><span>Merah (tinggi / fill)</span></div><p class="muted compact">Garis kuning = long section (LS), garis biru = cross section (CS). Label grid dibuat kecil agar peta lebih rapi untuk presentasi dan download.</p><div class="map-frame" id="mapFrame">Preview peta akan muncul setelah proses selesai.</div></section>
-      <section class="card" id="section"><div class="card-head"><h3>Long Section & Cross Section</h3><span>Civil 3D Style</span></div><p class="muted">Preview section dibagi jelas antara long section dan cross section. Export PDF juga dipisah per jenis agar lebih informatif dan rapi.</p><div class="section-frame" id="sectionFrame">Section preview akan tampil setelah proses selesai.</div></section>
-      <section class="card" id="export"><div class="card-head"><h3>Export Hasil</h3><span>Download</span></div><div class="export-actions"><a id="downloadReport" class="btn disabled" href="#">Laporan TXT</a><a id="downloadMap" class="btn disabled" href="#">Peta SVG</a><a id="downloadProfile" class="btn disabled" href="#">Profil CSV</a><a id="downloadLong" class="btn disabled" href="#">Long Section PDF</a><a id="downloadCross" class="btn disabled" href="#">Cross Section PDF</a><a id="downloadZip" class="btn disabled" href="#">Download ZIP</a></div><details class="report-details"><summary>Lihat JSON ringkasan teknis</summary><pre id="reportBox">Ringkasan teknis akan tampil setelah proses selesai.</pre></details></section>
-      <footer class="footer"><span>© Dashboard Volume Timbunan Pro</span><span>Developed by Egi Nugraha • ✉ egi.geomatika@gmail.com • ☎ 0895604053590</span></footer>
+
+      <section class="result-grid" id="hasil">
+        <div class="metric fill">
+          <span>Volume Timbunan</span>
+          <strong id="mFill">-</strong>
+          <small>m³</small>
+        </div>
+
+        <div class="metric cut">
+          <span>Volume Galian</span>
+          <strong id="mCut">-</strong>
+          <small>m³</small>
+        </div>
+
+        <div class="metric net">
+          <span>Net Volume</span>
+          <strong id="mNet">-</strong>
+          <small>m³</small>
+        </div>
+
+        <div class="metric area">
+          <span>Luas Timbunan</span>
+          <strong id="mArea">-</strong>
+          <small>m²</small>
+        </div>
+      </section>
+
+      <section class="card preview-card" id="map">
+        <div class="card-head">
+          <h3>Peta Heatmap Perubahan Elevasi</h3>
+          <span>Top View + Section Line</span>
+        </div>
+
+        <div class="legend gradient-legend">
+          <span>Biru (rendah / cut)</span>
+          <i></i>
+          <span>Merah (tinggi / fill)</span>
+        </div>
+
+        <p class="muted compact">
+          Garis kuning = long section (LS), garis biru = cross section (CS).
+          Label grid dibuat kecil agar peta lebih rapi untuk presentasi dan download.
+        </p>
+
+        <div class="map-frame" id="mapFrame">
+          Preview peta akan muncul setelah proses selesai.
+        </div>
+      </section>
+
+      <section class="card" id="section">
+        <div class="card-head">
+          <h3>Long Section & Cross Section</h3>
+          <span>Civil 3D Style</span>
+        </div>
+
+        <p class="muted">
+          Preview section dibagi jelas antara long section dan cross section.
+          Export PDF juga dipisah per jenis agar lebih informatif dan rapi.
+        </p>
+
+        <div class="section-frame" id="sectionFrame">
+          Section preview akan tampil setelah proses selesai.
+        </div>
+      </section>
+
+      <section class="card" id="export">
+        <div class="card-head">
+          <h3>Export Hasil</h3>
+          <span>Download</span>
+        </div>
+
+        <div class="export-actions">
+          <a id="downloadReport" class="btn disabled" href="#">Laporan TXT</a>
+          <a id="downloadMap" class="btn disabled" href="#">Peta SVG</a>
+          <a id="downloadProfile" class="btn disabled" href="#">Profil CSV</a>
+          <a id="downloadLong" class="btn disabled" href="#">Long Section PDF</a>
+          <a id="downloadCross" class="btn disabled" href="#">Cross Section PDF</a>
+          <a id="downloadZip" class="btn disabled" href="#">Download ZIP</a>
+        </div>
+
+        <details class="report-details">
+          <summary>Lihat JSON ringkasan teknis</summary>
+          <pre id="reportBox">Ringkasan teknis akan tampil setelah proses selesai.</pre>
+        </details>
+      </section>
+
+      <footer class="footer">
+        <span>© Dashboard Volume Timbunan</span>
+        <span>Developed by Egi Nugraha • ✉ egi.geomatika@gmail.com • ☎ 0895604053590</span>
+      </footer>
     </main>
-  </div><script src="app.js"></script>
-</body></html>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
